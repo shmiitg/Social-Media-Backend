@@ -115,7 +115,7 @@ router.get("/page/:pageNo/:limit", (req, res) => {
             "SELECT post.id, post.description, user.email, user.name FROM post LEFT JOIN user ON post.userId=user.id LIMIT ? OFFSET ?";
         db.query(getPosts, [limit, (pageNo - 1) * limit], (err, data) => {
             if (err) {
-                return res.status(401).json({ error: "Something went wrong" });
+                return res.status(401).json({ error: err });
             }
             res.status(200).json({ posts: data });
         });
