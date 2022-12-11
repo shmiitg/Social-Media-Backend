@@ -12,6 +12,9 @@ router.get("/info", authenticateToken, (req, res) => {
             if (err) {
                 return res.status(401).json({ error: "Something went wrong" });
             }
+            if (data.length === 0) {
+                return res.status(401).json({ error: "No user found" });
+            }
             const { password, ...user } = data[0];
             res.status(200).json({ user: user });
         });
